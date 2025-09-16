@@ -17,7 +17,7 @@ _让每一次 AI 辅助编程都清晰可见，让成本和效率都在掌控之
 
 ---
 
-## 🎯 产品使命
+## 🎯 产品介绍
 
 在 AI 编程时代，我们每天都在使用 Claude Code 等智能编程工具。但你是否想过：
 
@@ -26,6 +26,24 @@ _让每一次 AI 辅助编程都清晰可见，让成本和效率都在掌控之
 - 🔍 **如何优化 AI 工具的使用方式？**
 
 **VibeLoft Desktop** 就是为了解决这些问题而生 —— 专业的 AI 编程工具使用量监控平台，让你的每一次 AI 辅助编程都数据化、可视化、可优化。
+
+### 📱 产品截图
+
+#### 🎛️ 主界面展示
+
+<div align="center">
+<img src="./assets/screen1.png" alt="主界面" width="45%">
+<img src="./assets/screen2.png" alt="监控面板" width="45%">
+</div>
+
+<div align="center">
+<img src="./assets/screen3.png" alt="数据分析" width="45%">
+<img src="./assets/screen4.png" alt="设置界面" width="45%">
+</div>
+
+#### 📊 状态栏展示
+
+<img src="./assets/bar1.png" alt="使用统计图表" width="60%">
 
 ---
 
