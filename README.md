@@ -159,11 +159,11 @@ flutter pub get
 
 <div align="center">
 
-| Platform       | Status  | Download                                              |
-| -------------- | ------- | ----------------------------------------------------- |
-| 🪟 **Windows** | ✅ 支持 | [下载 .exe](https://releases.vibeloft.dev/windows)    |
-| 🍎 **macOS**   | ✅ 支持 | [下载 .dmg](https://releases.vibeloft.dev/macos)      |
-| 🐧 **Linux**   | ✅ 支持 | [下载 .AppImage](https://releases.vibeloft.dev/linux) |
+| Platform       | Status  | Download                                                                                                    |
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------------- |
+| 🪟 **Windows** | ✅ 支持 | [下载 .exe](https://releases.vibeloft.dev/windows)                                                          |
+| 🍎 **macOS**   | ✅ 支持 | [下载 .dmg](https://github.com/BellyBook/vibeloft-desktop/releases/download/1.0.0/vibeloft-1.0.0-macos.dmg) |
+| 🐧 **Linux**   | ✅ 支持 | [下载 .AppImage](https://releases.vibeloft.dev/linux)                                                       |
 
 </div>
 
