@@ -91,7 +91,7 @@ NC='\033[0m'  # No Color
 # 默认参数
 PLATFORM="all"
 BUILD_MODE="release"
-SKIP_ICONS=false
+SKIP_ICONS=true
 SKIP_BUILD=false
 SKIP_PACKAGE=false
 CLEAN_BUILD=false

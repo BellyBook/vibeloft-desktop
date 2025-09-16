@@ -287,14 +287,12 @@ class TodayActivityWidget extends StatelessWidget {
 
     // 汇总各模型的使用情况
     final modelTotals = <String, double>{}; // 键：模型名，值：累计成本
-    double totalCost = 0.0; // 该时段总成本
 
     for (final block in blocks) {
       for (final entry in block.perModelStats.entries) {
         final model = entry.key;
         final stats = entry.value;
         modelTotals[model] = (modelTotals[model] ?? 0) + stats.costUsd;
-        totalCost += stats.costUsd;
       }
     }
 
@@ -305,49 +303,45 @@ class TodayActivityWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       child: Column(
-        children: [
-          // 模型标签行（不显示价格）
-          Row(
-            children: [
-              Expanded(
-                child: Wrap(
-                  spacing: 4,
-                  runSpacing: 4,
-                  children: sortedModels.map((entry) {
-                    final model = entry.key;
-                    final color = _getModelColor(model);
+        children: sortedModels.map((entry) {
+          final model = entry.key;
+          final cost = entry.value;
+          final color = _getModelColor(model);
 
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        model,
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: color,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    );
-                  }).toList(),
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2),
+            child: Row(
+              children: [
+                // 模型标签
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    model,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: color,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
-              ),
-              // 总价格显示在行尾，字号更小
-              const SizedBox(width: 8),
-              Text(
-                '\$${totalCost.toStringAsFixed(4)}',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.green,
-                  fontSize: 11,
+                const Spacer(),
+                // 该模型的价格
+                Text(
+                  '\$${cost.toStringAsFixed(4)}',
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.green,
+                    fontSize: 11,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          );
+        }).toList(),
       ),
     );
   }
