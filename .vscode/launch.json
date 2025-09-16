@@ -1,0 +1,32 @@
+{
+  // VS Code 运行配置
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Desktop App (macOS)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "deviceId": "macos",
+      "args": []
+    },
+    {
+      "name": "Desktop App (macOS - Profile)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "deviceId": "macos",
+      "flutterMode": "profile",
+      "args": []
+    },
+    {
+      "name": "Desktop App (macOS - Release)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "deviceId": "macos",
+      "flutterMode": "release",
+      "args": []
+    }
+  ]
+}

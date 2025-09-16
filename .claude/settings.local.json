@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter:*)",
+      "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Read(//Users/liangze/.claude/projects/**)",
+      "Bash(python3:*)",
+      "Bash(nc localhost 56501)",
+      "Bash(osascript:*)",
+      "Bash(find:*)",
+      "Bash(tee:*)",
+      "Bash(dart run:*)",
+      "Read(//Users/liangze/.claude/**)",
+      "Bash(dart:*)",
+      "Bash(grep:*)",
+      "Bash(nc localhost 56748)",
+      "Bash(nc localhost 64180)",
+      "Bash(xargs ls:*)",
+      "Bash(nc localhost 54079)",
+      "WebSearch",
+      "Bash(nc localhost 52079)",
+      "Bash(nc localhost 60659)",
+      "Bash(chmod:*)",
+      "Read(//Volumes/**)",
+      "Bash(mdls:*)",
+      "Bash(hdiutil detach:*)",
+      "Bash(./start.sh:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

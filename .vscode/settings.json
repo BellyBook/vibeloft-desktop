@@ -1,0 +1,25 @@
+{
+  // Flutter 和 Dart 配置
+  "dart.flutterSdkPath": "/Users/liangze/flutter",
+  "dart.debugExternalPackageLibraries": false,
+  "dart.debugSdkLibraries": false,
+  
+  // 默认运行配置
+  "flutter.defaultDevice": "macos",
+  "flutter.runArgs": [
+    "-d",
+    "macos"
+  ],
+  
+  // 启用 Flutter 热重载
+  "flutter.hotReloadOnSave": "always",
+  
+  // 确保 Dart 代码镜头功能启用
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  
+  // 启用运行代码镜头
+  "dart.enableCodeLens": true,
+  "dart.showMainCodeLens": true,
+  "dart.showTestCodeLens": true
+}
