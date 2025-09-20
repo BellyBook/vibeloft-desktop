@@ -177,8 +177,8 @@ class TrayPopoverController: NSObject {
             button.action = #selector(togglePopover)
             button.target = self
 
-            // 设置右键菜单
-            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+            // 只响应左键点击
+            button.sendAction(on: [.leftMouseUp])
         }
     }
 
@@ -255,18 +255,11 @@ class TrayPopoverController: NSObject {
     // ─────────────────────────────────────────────────────────────────────────
 
     @objc private func togglePopover() {
-        if let event = NSApp.currentEvent {
-            if event.type == .rightMouseUp {
-                // 右键显示菜单
-                showContextMenu()
-            } else {
-                // 左键切换 popover
-                if popover?.isShown == true {
-                    closePopover()
-                } else {
-                    showPopover()
-                }
-            }
+        // 左键切换 popover
+        if popover?.isShown == true {
+            closePopover()
+        } else {
+            showPopover()
         }
     }
 
@@ -351,32 +344,6 @@ class TrayPopoverController: NSObject {
 
         // 通知 Flutter 端
         channel?.invokeMethod("onPopoverClosed", arguments: nil)
-    }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // ▎显示右键菜单
-    // ─────────────────────────────────────────────────────────────────────────
-
-    private func showContextMenu() {
-        let menu = NSMenu()
-
-        menu.addItem(NSMenuItem(
-            title: "显示主窗口",
-            action: #selector(showMainWindow),
-            keyEquivalent: ""
-        ))
-
-        menu.addItem(NSMenuItem.separator())
-
-        menu.addItem(NSMenuItem(
-            title: "退出",
-            action: #selector(quitApp),
-            keyEquivalent: "q"
-        ))
-
-        statusItem?.menu = menu
-        statusItem?.button?.performClick(nil)
-        statusItem?.menu = nil // 清除菜单，恢复点击行为
     }
 
     // ─────────────────────────────────────────────────────────────────────────

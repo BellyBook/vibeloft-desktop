@@ -1,18 +1,21 @@
 /*
- * Purpose: 系统托盘管理服务，使用原生 NSPopover 实现
- * Inputs: 原生托盘事件、Flutter 方法调用
- * Outputs: 原生托盘图标、NSPopover 显示、主窗口控制
+ * Purpose: 系统托盘管理服务，跨平台实现
+ * Inputs: 托盘事件、Flutter 方法调用
+ * Outputs: 托盘图标、弹窗显示、主窗口控制
  */
+
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tray_manager/tray_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ▎托盘服务类 - 使用原生 NSPopover
+// ▎托盘服务类 - 跨平台实现
 // ═══════════════════════════════════════════════════════════════════════════
 
-class TrayService {
+class TrayService with TrayListener {
   static final TrayService _instance = TrayService._internal();
   factory TrayService() => _instance;
   TrayService._internal();
@@ -29,10 +32,24 @@ class TrayService {
   VoidCallback? _onShowMainWindow;
 
   // ─────────────────────────────────────────────────────────────────────────
-  // ▎初始化托盘（原生实现）
+  // ▎初始化托盘（跨平台）
   // ─────────────────────────────────────────────────────────────────────────
 
   Future<void> initSystemTray() async {
+    if (Platform.isMacOS) {
+      // macOS：使用原生 NSPopover
+      await _initMacOSTray();
+    } else if (Platform.isWindows) {
+      // Windows：使用 tray_manager
+      await _initWindowsTray();
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ▎macOS 托盘初始化
+  // ─────────────────────────────────────────────────────────────────────────
+
+  Future<void> _initMacOSTray() async {
     // 设置方法调用处理器
     _channel.setMethodCallHandler(_handleMethodCall);
 
@@ -40,9 +57,21 @@ class TrayService {
     await _channel.invokeMethod('setToolTip', {
       'tooltip': 'VibeLoft Desktop',
     });
+  }
 
-    // 注意：原生代码已经在 TrayPopoverController 初始化时创建了托盘图标
-    // 所以这里不需要再调用 tray_manager
+  // ─────────────────────────────────────────────────────────────────────────
+  // ▎Windows 托盘初始化
+  // ─────────────────────────────────────────────────────────────────────────
+
+  Future<void> _initWindowsTray() async {
+    // 设置托盘监听器
+    trayManager.addListener(this);
+
+    // 设置托盘图标（使用 PNG，tray_manager 会自动处理）
+    await trayManager.setIcon('assets/app_icon.png');
+
+    // 设置工具提示
+    await trayManager.setToolTip('VibeLoft Desktop');
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -158,5 +187,60 @@ class TrayService {
     _onPopoverShown = null;
     _onPopoverClosed = null;
     _onShowMainWindow = null;
+
+    if (Platform.isWindows) {
+      trayManager.removeListener(this);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ▎Windows 托盘事件处理（TrayListener 接口）
+  // ─────────────────────────────────────────────────────────────────────────
+
+  @override
+  void onTrayIconMouseDown() {
+    // Windows：左键点击显示托盘窗口
+    if (Platform.isWindows) {
+      _showWindowsTrayWindow();
+    }
+  }
+
+  @override
+  void onTrayIconRightMouseDown() {
+    // Windows：右键不处理（根据需求已移除右键菜单）
+  }
+
+  @override
+  void onTrayIconMouseUp() {
+    // 不需要处理
+  }
+
+  @override
+  void onTrayIconRightMouseUp() {
+    // 不需要处理
+  }
+
+  @override
+  void onTrayMenuItemClick(MenuItem menuItem) {
+    // 不需要处理（没有菜单）
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ▎Windows 托盘窗口显示
+  // ─────────────────────────────────────────────────────────────────────────
+
+  Future<void> _showWindowsTrayWindow() async {
+    // Windows 平台简化实现：直接显示/隐藏主窗口
+    // 未来可以实现独立的托盘弹窗
+    final isVisible = await windowManager.isVisible();
+
+    if (isVisible) {
+      // 如果已显示，则隐藏
+      await windowManager.hide();
+    } else {
+      // 如果隐藏，则显示
+      await windowManager.show();
+      await windowManager.focus();
+    }
   }
 }

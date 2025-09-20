@@ -26,3 +26,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  # 托盘图标资源
+  assets:
+    - assets/app_icon.png
