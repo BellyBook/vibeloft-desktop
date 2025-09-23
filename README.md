@@ -177,7 +177,7 @@ flutter pub get
 
 | Platform       | Status  | Download                                                                                                    |
 | -------------- | ------- | ----------------------------------------------------------------------------------------------------------- |
-| 🪟 **Windows** | ✅ 支持 | [下载 .exe](https://releases.vibeloft.dev/windows)                                                          |
+| 🪟 **Windows** | ✅ 支持 | [我没有 windows 电脑，需自行打包](https://chunxiang.space)                                                  |
 | 🍎 **macOS**   | ✅ 支持 | [下载 .dmg](https://github.com/BellyBook/vibeloft-desktop/releases/download/1.0.0/vibeloft-1.0.0-macos.dmg) |
 | 🐧 **Linux**   | ✅ 支持 | [下载 .AppImage](https://releases.vibeloft.dev/linux)                                                       |
 
